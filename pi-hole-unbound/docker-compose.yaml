@@ -74,7 +74,7 @@ services:
 
 networks:
   dns_net:
-
+    driver: overlay
     ipam:
       config:
         - subnet: 172.23.0.0/24
