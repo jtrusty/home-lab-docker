@@ -56,6 +56,15 @@ services:
         ipv4_address: 172.23.0.8
     volumes:
       - /mnt/cephfs/unbound:/opt/unbound/etc/unbound
+    configs:
+      - source: unbound-config
+        target: /opt/unbound/etc/unbound/unbound.conf
+      - source: forward-records-config
+        target: /opt/unbound/etc/unbound/forward-records.conf
+      - source: a-records-config
+        target: /opt/unbound/etc/unbound/a-records.conf
+      - source: srv-records-config
+        target: /opt/unbound/etc/unbound/srv-records.conf
     ports:
       - "5053:53/tcp"
       - "5053:53/udp"
@@ -71,3 +80,13 @@ networks:
         - subnet: 172.23.0.0/24
   proxy:
     external: true
+
+configs:
+  unbound-config:
+    file: ./unbound.conf
+  forward-records-config:
+    file: ./forward-records.conf
+  a-records-config:
+    file: ./a-records.conf
+  srv-records-config:
+    file: ./srv-records.conf
