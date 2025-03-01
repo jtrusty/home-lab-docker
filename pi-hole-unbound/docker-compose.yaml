@@ -83,10 +83,10 @@ networks:
 
 configs:
   unbound-config:
-    file: ./unbound.conf
+    external: true
   forward-records-config:
-    file: ./forward-records.conf
+    external: true
   a-records-config:
-    file: ./a-records.conf
+    external: true
   srv-records-config:
-    file: ./srv-records.conf
+    external: true
