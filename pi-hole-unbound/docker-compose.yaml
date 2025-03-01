@@ -80,3 +80,13 @@ networks:
         - subnet: 172.23.0.0/24
   proxy:
     external: true
+
+configs:
+  unbound-config:
+    file: ./unbound.conf
+  forward-records-config:
+    file: ./forward-records.conf
+  a-records-config:
+    file: ./a-records.conf
+  srv-records-config:
+    file: ./srv-records.conf
