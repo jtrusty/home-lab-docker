@@ -11,6 +11,7 @@ services:
         constraints: [node.role == manager]
     networks:
       - dns_network
+      - proxy
     ports:
       # DNS Ports
       - "53:53/tcp"
@@ -29,7 +30,7 @@ services:
       FTLCONF_webserver_api_password: ${FTLCONF_webserver_api_password}
       # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
       FTLCONF_dns_listeningMode: 'all'
-      FTLCONF_dns_upstreams: '10.10.10.10#5335' # Unbound
+      FTLCONF_dns_upstreams: 'unbound#53' # Unbound
       # Don't use pihole as a NTP Server
       FTLCONF_ntp_ipv4_active: ${NTP_IPV4_ACTIVE:-true}
       FTLCONF_ntp_ipv6_active: ${NTP_IPV6_ACTIVE:-true}
@@ -47,7 +48,7 @@ services:
       # Optional, if Pi-hole should get some more processing time
       - SYS_NICE
     volumes:
-    # For persisting Pi-hole's databases and common configuration file
+      # For persisting Pi-hole's databases and common configuration file
       - /mnt/cephfs/pihole/etc/pihole:/etc/pihole:rw
       # Uncomment the below if you have custom dnsmasq config files that you want to persist. Not needed for most starting fresh with Pi-hole v6. If you're upgrading from v5 you and have used this directory before, you should keep it enabled for the first v6 container start to allow for a complete migration. It can be removed afterwards. Needs environment variable FTLCONF_misc_etc_dnsmasq_d: 'true'
       - /mnt/cephfs/pihole/etc/dnsmasq.d:/etc/dnsmasq.d:rw
@@ -85,6 +86,9 @@ networks:
     external: true
   dns_network:
     driver: overlay
+    ipam:
+        config:
+        - subnet: 172.23.0.0/24
 
 configs:
   unbound-config:
