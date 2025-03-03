@@ -4,6 +4,9 @@ services:
   gotify:
     hostname: gotify
     image: gotify/server
+    deploy:
+      placement:
+        constraints: [node.role == manager]
     volumes:
       - /mnt/cephfs/gotify:/app/data
     ports:
@@ -18,3 +21,18 @@ services:
       TZ: America/Chicago
       # Set a password to access the web interface.
       GOTIFY_DEFAULTUSER_PASS: ${GOTIFY_DEFAULTUSER_PASS}
+
+  pushtify:
+    hostname: pushtify
+    image: ghcr.io/sebw/pushtify:latest
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    depends_on:
+      - gotify
+    environment:
+      GOTIFY_TOKEN: ${GOTIFY_TOKEN}
+      GOTIFY_HOST: gotify
+      GOTIFY_PROTOCOL: http
+      PUSHOVER_USERKEY: ${PUSHOVER_USERKEY}
+    restart: unless-stopped
