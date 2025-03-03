@@ -6,6 +6,9 @@ services:
     image: gotify/server
     volumes:
       - /mnt/cephfs/gotify:/app/data
+    ports:
+      # Default HTTP Port
+      - 8080:80/tcp
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
