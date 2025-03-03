@@ -32,9 +32,9 @@ services:
       FTLCONF_dns_listeningMode: 'all'
       FTLCONF_dns_upstreams: 'unbound#53' # Unbound
       # Don't use pihole as a NTP Server
-      FTLCONF_ntp_ipv4_active: false
-      FTLCONF_ntp_ipv6_active: false
-      FTLCONF_ntp_sync_active: false
+      FTLCONF_ntp_ipv4_active: 'false'
+      FTLCONF_ntp_ipv6_active: 'false'
+      FTLCONF_ntp_sync_active: 'false'
       # Set the IP of the DNS server(s) to forward queries to
       FTLCONF_dns_revServers: ${FTLCONF_dns_revServers}
       # Set the IP of the web server
