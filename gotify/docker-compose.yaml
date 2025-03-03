@@ -13,4 +13,8 @@ services:
     security_opt:
       - no-new-privileges:true
     environment:
-      - TZ=America/Chicago
+    # Set the appropriate timezone for your location from
+      # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones, e.g:
+      TZ: America/Chicago
+      # Set a password to access the web interface.
+      GOTIFY_DEFAULTUSER_PASS: ${GOTIFY_DEFAULTUSER_PASS}
