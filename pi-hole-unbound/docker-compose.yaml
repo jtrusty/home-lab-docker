@@ -25,20 +25,20 @@ services:
     environment:
       # Set the appropriate timezone for your location from
       # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones, e.g:
-      TZ: ${TZ:-UTC}
+      TZ: America/Chicago
       # Set a password to access the web interface. Not setting one will result in a random password being assigned
       FTLCONF_webserver_api_password: ${FTLCONF_webserver_api_password}
       # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
       FTLCONF_dns_listeningMode: 'all'
       FTLCONF_dns_upstreams: 'unbound#53' # Unbound
       # Don't use pihole as a NTP Server
-      FTLCONF_ntp_ipv4_active: ${NTP_IPV4_ACTIVE:-true}
-      FTLCONF_ntp_ipv6_active: ${NTP_IPV6_ACTIVE:-true}
-      FTLCONF_ntp_sync_active: ${NTP_IPV6_ACTIVE:-true}
+      FTLCONF_ntp_ipv4_active: false
+      FTLCONF_ntp_ipv6_active: false
+      FTLCONF_ntp_sync_active: false
       # Set the IP of the DNS server(s) to forward queries to
       FTLCONF_dns_revServers: ${FTLCONF_dns_revServers}
       # Set the IP of the web server
-      FTLCONF_webserver_port: ${FTLCONF_webserver_port}
+      FTLCONF_webserver_port: 80
     cap_add:
       # See https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
       # Required if you are using Pi-hole as your DHCP server, else not needed
