@@ -24,7 +24,7 @@ services:
 
   pushtify:
     hostname: pushtify
-    image: ghcr.io/sebw/pushtify:latest
+    image: joaodrp/pushtify:latest
     deploy:
       placement:
         constraints: [node.role == manager]
